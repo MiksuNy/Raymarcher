@@ -1,13 +1,11 @@
 #include "marching.h"
 
-extern std::vector<Object> scene_objects;
-
-void RayMarch(const int max_steps, const int max_bounces, std::fstream& file) {
-	file << "P3\n " << SCREEN_W << " " << SCREEN_H << "\n255\n";
+void RayMarch(std::fstream& file) {
+	file << "P3\n" << SCREEN_W << " " << SCREEN_H << "\n255\n";
 
 	for (int y = SCREEN_H; y > 0; y--) {
 		for (int x = 0; x < SCREEN_W; x++) {
-			Ray ray(Vec3(0.0, 0.2, 1.0), screenToViewDir(x, y));
+			Ray ray(CAM_POS, screenToViewDir(x, y));
 
 			int steps = 0;
 			Vec3 hit_normal;
@@ -17,7 +15,7 @@ void RayMarch(const int max_steps, const int max_bounces, std::fstream& file) {
 				if (dist < HIT_THRESHOLD && dist > -HIT_THRESHOLD) {
 					hit_normal = NormalFromSceneSdf(ray.origin);
 					break;
-				} else if (dist > 1000.0) {
+				} else if (dist > 10000.0) {
 					break;
 				} else {
 					ray.origin += ray.direction * dist;

@@ -1,16 +1,16 @@
 #include "scene.h"
 
-extern std::vector<Object> scene_objects;
+std::vector<Sphere> scene_spheres;
 
 void LoadSceneFromFile(const char* file_path) {
 	std::fstream file(file_path, std::fstream::in);
 	std::string line;
 	while (getline(file, line)) {
-		if (line.substr(0, 6) == "sphere ") {
-			Sphere s;
-			sscanf_s(line.c_str(), "sphere %f %f %f %f", &s.position.x, &s.position.y, &s.position.z, &s.radius);
-			scene_objects.push_back(s);
-		}
+		Sphere s;
+		sscanf_s(line.c_str(), "sphere %lf %lf %lf %f", &s.position.x, &s.position.y, &s.position.z, &s.radius);
+		std::cout << s.position.x << ", " << s.position.y << ", " << s.position.z << "\n";
+		std::cout << s.radius << "\n";
+		scene_spheres.push_back(s);
 	}
 	file.close();
 }
@@ -18,8 +18,8 @@ void LoadSceneFromFile(const char* file_path) {
 // Palauttaa pienimmän turvallisen välimatkan scenen objektiin
 float CheckSceneSdf(const Vec3 at_pos) {
 	float final_dist = 10000000000.0f;
-	for (Object o : scene_objects) {
-		float temp_dist = o.checkSdf(at_pos);
+	for (Sphere s : scene_spheres) {
+		float temp_dist = s.sdf(at_pos);
 		final_dist = std::min(final_dist, temp_dist);
 	}
 	return final_dist;
@@ -41,8 +41,4 @@ Vec3 NormalFromSceneSdf(const Vec3 at_pos) {
 	);
 
 	return Vec3::normalized(Vec3(v1 - v2));
-}
-
-float Sphere::checkSdf(const Vec3 at_pos) {
-	return Vec3::length(at_pos - this->position) - this->radius;
 }
