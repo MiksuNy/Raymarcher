@@ -2,9 +2,6 @@
 
 #include <cmath>
 
-// Vec3 luokkaa käytetään myös RGB värinä jotta ei tarvitse tehdä kokonaan uutta luokkaa sille
-#define Color3 Vec3
-
 class Vec3 {
 public:
 	double x = 0.0;

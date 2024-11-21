@@ -1,5 +1,6 @@
 #include "marching.h"
 
+// TODO: This should be reworked to maybe accept a file format as input and outputting accordingly
 void RayMarch(std::fstream& file) {
 	file << "P3\n" << SCREEN_W << " " << SCREEN_H << "\n255\n";
 
@@ -15,16 +16,16 @@ void RayMarch(std::fstream& file) {
 				if (dist < HIT_THRESHOLD && dist > -HIT_THRESHOLD) {
 					hit_normal = NormalFromSceneSdf(ray.origin);
 					break;
-				} else if (dist > 10000.0) {
+				} else if (dist > 1000.0) {
 					break;
 				} else {
 					ray.origin += ray.direction * dist;
 					steps++;
 				}
 			}
-			// Kerrotaan 255 jotta saadaan 0-255 väriarvo
-			//file << floor(hit_normal.x * 255.0) << " " << floor(hit_normal.y * 255.0) << " " << floor(hit_normal.z * 255.0) << " ";
-			file << floor((float(steps) / float(MAX_STEPS)) * 255) << " " << "0" << " " << "0" << " ";
+			// Normal or step count visualisation
+			file << floor(hit_normal.x * 255.0) << " " << floor(hit_normal.y * 255.0) << " " << floor(hit_normal.z * 255.0) << " ";
+			//file << "0" << " " << floor((float(steps) / float(MAX_STEPS)) * 255) << " " << "0" << " ";
 		}
 		file << "\n";
 	}

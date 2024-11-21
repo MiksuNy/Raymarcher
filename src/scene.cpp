@@ -2,23 +2,25 @@
 
 std::vector<Sphere> scene_spheres;
 
+// TODO: Load camera and other types of primitives from scene files
 void LoadSceneFromFile(const char* file_path) {
 	std::fstream file(file_path, std::fstream::in);
 	std::string line;
 	while (getline(file, line)) {
-		Sphere s;
-		sscanf_s(line.c_str(), "sphere %lf %lf %lf %f", &s.position.x, &s.position.y, &s.position.z, &s.radius);
-		std::cout << s.position.x << ", " << s.position.y << ", " << s.position.z << "\n";
-		std::cout << s.radius << "\n";
-		scene_spheres.push_back(s);
+		if (line.substr(0, 6) == "sphere") {
+			Sphere s;
+			sscanf_s(line.c_str(), "sphere %lf %lf %lf %f", &s.position.x, &s.position.y, &s.position.z, &s.radius);
+			std::cout << "Found sphere at pos: " << s.position.x << ", " << s.position.y << ", " << s.position.z << "\n";
+			std::cout << "With radius: " << s.radius << "\n\n";
+			scene_spheres.push_back(s);
+		}
 	}
 	file.close();
 }
 
-// Palauttaa pienimmän turvallisen välimatkan scenen objektiin
 float CheckSceneSdf(const Vec3 at_pos) {
 	float final_dist = 10000000000.0f;
-	for (Sphere s : scene_spheres) {
+	for (Sphere& s : scene_spheres) {
 		float temp_dist = s.sdf(at_pos);
 		final_dist = std::min(final_dist, temp_dist);
 	}
