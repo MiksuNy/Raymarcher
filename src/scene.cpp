@@ -22,7 +22,7 @@ float CheckSceneSdf(const Vec3 at_pos) {
 	float final_dist = 10000000000.0f;
 	for (Sphere& s : scene_spheres) {
 		float temp_dist = s.sdf(at_pos);
-		final_dist = std::min(final_dist, temp_dist);
+		final_dist = (final_dist > temp_dist) ? temp_dist : final_dist;
 	}
 	return final_dist;
 }

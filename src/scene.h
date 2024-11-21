@@ -18,10 +18,9 @@ Vec3 NormalFromSceneSdf(const Vec3 at_pos);
 class Sphere {
 public:
 	Vec3 position;
-	float radius;
+	float radius = 0.0f;
 
-	inline float sdf(const Vec3 at_pos) {
-		const Vec3 pos = at_pos - this->position;
-		return Vec3::length(pos) - this->radius;
+	inline float sdf(const Vec3 at_pos) const {
+		return Vec3::length(at_pos - this->position) - this->radius;
 	}
 };

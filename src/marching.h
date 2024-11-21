@@ -11,7 +11,7 @@ const float ASPECT = float(SCREEN_W) / float(SCREEN_H);
 const float CAM_DIR_Z = -1.0;
 const Vec3 CAM_POS = Vec3(0.0, 0.0, 5.0);
 const float HIT_THRESHOLD = 0.0005;
-const int MAX_STEPS = 256;
+const int MAX_STEPS = 512;
 
 // file: output image file, function is not responsible for opening and closing the file
 void RayMarch(std::fstream& file);

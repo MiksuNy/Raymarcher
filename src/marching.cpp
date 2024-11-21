@@ -24,8 +24,11 @@ void RayMarch(std::fstream& file) {
 				}
 			}
 			// Normal or step count visualisation
-			file << floor(hit_normal.x * 255.0) << " " << floor(hit_normal.y * 255.0) << " " << floor(hit_normal.z * 255.0) << " ";
+			//file << floor(hit_normal.x * 255.0) << " " << floor(hit_normal.y * 255.0) << " " << floor(hit_normal.z * 255.0) << " ";
 			//file << "0" << " " << floor((float(steps) / float(MAX_STEPS)) * 255) << " " << "0" << " ";
+			float light_strength = floor((Vec3::dot(hit_normal, Vec3(0.5, 0.7, 0.3)) * 255));
+			unsigned int light_value = (light_strength > 0 ? light_strength : 0);
+			file << light_value << " " << light_value << " " << light_value << " ";
 		}
 		file << "\n";
 	}
