@@ -8,12 +8,15 @@
 
 #include "vec.h"
 
-void LoadSceneFromFile(const char* file_path);
+namespace Scene {
+	void LoadFromFile(const char* file_path);
 
-// Return the minimum distance to a 3D point in the scene
-float CheckSceneSdf(const Vec3 at_pos);
+	// Return the minimum distance to a 3D point in the scene
+	float CheckSdf(const Vec3 at_pos);
 
-Vec3 NormalFromSceneSdf(const Vec3 at_pos);
+	// Checks scene distance at a few offsets to determine normal direction
+	Vec3 NormalAt(const Vec3 at_pos);
+}
 
 class Sphere {
 public:

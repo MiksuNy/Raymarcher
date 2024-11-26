@@ -9,7 +9,7 @@ public:
 	double z = 0.0;
 
 	Vec3() = default;
-	Vec3(float x, float y, float z);
+	Vec3(double x, double y, double z);
 
 	inline static float length(const Vec3& a) {
 		return std::sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z));

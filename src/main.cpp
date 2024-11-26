@@ -2,12 +2,9 @@
 #include "scene.h"
 
 int main() {
-	std::fstream image_file;
-	image_file.open("../out/image.ppm", std::fstream::out);
+	Scene::LoadFromFile("../res/test.scene");
 
-	LoadSceneFromFile("../res/test.scene");
+	Raymarcher::Raymarch();
 
-	RayMarch(image_file);
-
-	image_file.close();
+	std::cout << "Pixel data in kilobytes: " << Raymarcher::pixel_buffer.size() / 1024 << std::endl;
 }
