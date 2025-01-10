@@ -1,10 +1,11 @@
 #include "marching.h"
 #include "scene.h"
+#include "image.h"
 
 int main() {
 	Scene::LoadFromFile("../res/test.scene");
 
 	Raymarcher::Raymarch();
 
-	std::cout << "Pixel data in kilobytes: " << Raymarcher::pixel_buffer.size() / 1024 << std::endl;
+	Image::WritePPM("../out/image.ppm", Raymarcher::pixel_buffer);
 }

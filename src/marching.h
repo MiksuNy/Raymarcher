@@ -4,6 +4,7 @@
 
 #include "scene.h"
 #include "ray.h"
+#include "color.h"
 
 namespace Raymarcher {
 	const int SCREEN_W = 640;
@@ -14,11 +15,11 @@ namespace Raymarcher {
 	const float HIT_THRESHOLD = 0.0005;
 	const int MAX_STEPS = 512;
 
-	extern std::vector<char> pixel_buffer;
+	extern std::vector<Color> pixel_buffer;
 
 	// Renders the scene and stores pixels into pixel_buffer
 	void Raymarch();
 
 	// Transform pixel coordinates to normalized view direction
-	Vec3 screenToViewDir(int x, int y, float z = CAM_DIR_Z);
+	Vec3 ScreenToViewDir(int x, int y, float z = CAM_DIR_Z);
 }
