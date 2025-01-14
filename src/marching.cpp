@@ -34,6 +34,6 @@ void Raymarcher::Raymarch() {
 	}
 }
 
-Vec3 Raymarcher::ScreenToViewDir(int x, int y, float z) {
+Vec3 Raymarcher::ScreenToViewDir(const int x, const int y, const float z) {
 	return Vec3::Normalize(Vec3((float(x) / float(SCREEN_W) - 0.5) * ASPECT, float(y) / float(SCREEN_H) - 0.5, z));
 }

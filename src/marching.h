@@ -21,5 +21,5 @@ namespace Raymarcher {
 	void Raymarch();
 
 	// Transform pixel coordinates to normalized view direction
-	Vec3 ScreenToViewDir(int x, int y, float z = CAM_DIR_Z);
+	Vec3 ScreenToViewDir(const int x, const int y, const float z = CAM_DIR_Z);
 }

@@ -1,7 +1,8 @@
 #include "image.h"
+#include "marching.h"
 
 void Image::WritePPM(const char* file_path, const std::vector<Color> &pixel_buffer) {
-	std::fstream output_file(file_path, std::fstream::out);
+	std::ofstream output_file(file_path, std::ios::out);
 
 	output_file << "P3\n" << Raymarcher::SCREEN_W << ' ' << Raymarcher::SCREEN_H << "\n255\n";
 
@@ -13,4 +14,6 @@ void Image::WritePPM(const char* file_path, const std::vector<Color> &pixel_buff
 		}
 		output_file << '\n';
 	}
+
+	output_file.close();
 }
